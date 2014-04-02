@@ -1,0 +1,21 @@
+{
+  "description": "A module used to populate /etc/motd \n with various statistical information",
+  "source": "UNKNOWN",
+  "dependencies": [
+
+  ],
+  "summary": "A module to populate /etc/motd",
+  "project_page": "UNKNOWN",
+  "name": "mdobrev-motd",
+  "author": "mdobrev",
+  "types": [
+
+  ],
+  "version": "0.0.1",
+  "license": "Affero GPL",
+  "checksums": {
+    "Modulefile": "fbafdcd7e9e274d547762599b8a2f266",
+    "templates/motd.erb": "800a6e0587a6a305e45754584f2fad72",
+    "manifests/init.pp": "ab12401f029ab53883af466a72db3019"
+  }
+}

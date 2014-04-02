@@ -1,0 +1,39 @@
+
+ ____                               ____                       
+/ ___|  __ _ _ __ _____   _____    / ___|_ __ ___  _   _ _ __  
+\___ \ / _` | '_ ` _ \ \ / / _ \  | |  _| '__/ _ \| | | | '_ \ 
+ ___) | (_| | | | | | \ V / (_) | | |_| | | | (_) | |_| | |_) |
+|____/ \__,_|_| |_| |_|\_/ \___/   \____|_|  \___/ \__,_| .__/ 
+                                                        |_|    
+
+###############################################################
+
+Welcome visitor,
+this is <%= scope['::fqdn'] %>
+
+I'm running <%= scope['::lsbdistdescription'] %> <%= scope['::architecture'] %>
+on a <% if scope['::is_virtual'] == 'true' -%>virtual (<%= scope['::virtual'] -%>)<% else %>physical<% end -%> server.
+
+    Kernel: <%= scope['::kernelrelease'] %>
+    Uptime: <%= scope['::uptime'] %>
+ Time Zone: <%= scope['::timezone'] %>
+ CPU Count: <%= scope['::processorcount'] %>
+    Memory: <%= scope['::memoryfree'] -%> free out of <%= scope['::memorysize'] %>
+   SELinux: <% if @selinux == "false" -%>not <% end -%>installed, current mode: <%= scope['::selinux_current_mode'] -%>, enforced: <%= scope['::selinux_enforced'] %>
+
+ Block devices:
+<% scope['::blockdevices'].split(',').each do |dev| -%>
+   /dev/<%= dev -%>: <%= scope['blockdevice_'+dev+'_size'] %>
+<% end -%>
+
+ Existing network interfaces:
+<% [@ifaces].flatten.each do |iface| -%>
+<% if scope.lookupvar('ipaddress_'+iface) != 'nil' -%>
+   <%= iface -%>: <%= scope['ipaddress_'+iface] -%>/<%= scope['netmask_'+iface] -%> MTU: <%= scope['mtu_'+iface] %>
+<% end -%>
+<% end -%>
+
+###############################################################
+
+This server is running Puppet <%= scope['::puppetversion'] %> with Facter <%= scope['::facterversion'] %>
+
